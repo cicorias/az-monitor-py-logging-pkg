@@ -25,8 +25,8 @@ jobs:
     - name: Build Package
       run: |
         python -m poetry build
-    - name: Push release
     - uses: actions/upload-artifact@v2
+      name: upload
       with:
         name: azfunctionsmonitor
         path: dist/
