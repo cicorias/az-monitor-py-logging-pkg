@@ -1,4 +1,4 @@
-__version__ = '0.1.111'
+__version__ = '0.1.112'
 
 from .LoggingHelper import LoggingHelper, get_logger
 
