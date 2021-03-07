@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "azfunctionsmonitor"
-version = "0.1.5"
+version = "0.1.6"
 description = "Loging helper for Azure Monitor and Open Census"
 authors = ["Shawn Cicoria <github@cicoria.com>"]
 license = "Apache-2.0"
