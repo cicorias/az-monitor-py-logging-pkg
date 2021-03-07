@@ -38,7 +38,7 @@ class LoggingHelper(logging.LoggerAdapter):
         properties = {
             "custom_dimensions": {
                 "CorrelationId": correlation_id if correlation_id is not None else "-- not provided --",
-                "invocationidd": context.invocation_id if context is not None else "-- no context --",
+                "invocationid": context.invocation_id if context is not None else "-- no context --",
             }
         }
 
