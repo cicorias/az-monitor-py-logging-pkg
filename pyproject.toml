@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "az-monitor-py-logging"
-version = "0.1.0"
+name = "azfunctionsmonitor"
+version = "0.1.4"
 description = "Loging helper for Azure Monitor and Open Census"
 authors = ["Shawn Cicoria <github@cicoria.com>"]
 license = "Apache-2.0"
