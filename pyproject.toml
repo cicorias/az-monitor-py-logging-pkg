@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "azfunctionsmonitor"
-version = "0.1.4"
+version = "0.1.5"
 description = "Loging helper for Azure Monitor and Open Census"
 authors = ["Shawn Cicoria <github@cicoria.com>"]
 license = "Apache-2.0"
 readme = "README.md"
-homepage = "https://github.com/cicorias/az-monitor-py-logging-pkg/README.md"
-documentation = "https://github.com/cicorias/az-monitor-py-logging-pkg/README.md"
+homepage = "https://github.com/cicorias/az-monitor-py-logging-pkg"
+documentation = "https://github.com/cicorias/az-monitor-py-logging-pkg"
 keywords = ["azure", "monitor", "cloud"]
 classifiers = [
     "License :: OSI Approved :: Apache Software License",
