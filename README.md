@@ -22,7 +22,6 @@ The package is published to [Pypi.org](https://pypi.org/project/azfunctionsmonit
 pip install azfunctionsmonitor
 ```
 
-
 Very simply you just ensure that the `APPLICATIONINSIGHTS_CONNECTION_STRING` environment variable is set for the application such as in WebApps or Azure Functions.
 
 Again refer to [OpenCensus](#opencensus) above for more.
@@ -51,3 +50,10 @@ Traceback (most recent call last):
 ValueError: Instrumentation key cannot be none or empty.
 WARNING:root:[my stuff] logging set to WARNING
 ```
+
+## Environment settings
+
+There are essentially only two key environment varaibles that the library is directly aware of
+
+- `APPLICATIONINSIGHTS_CONNECTION_STRING` - which is what OpenCensus relies on
+- `LOGLEVEL` - this is equivalent to the Python log levels and can be set to `DEBUG`, `INFO`, `WARNING`, `ERROR` etc.
