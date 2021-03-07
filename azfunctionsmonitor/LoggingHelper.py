@@ -1,5 +1,3 @@
-__version__ = '0.1.0'
-
 import logging
 import os
 from typing import Any, Dict, MutableMapping, Optional
