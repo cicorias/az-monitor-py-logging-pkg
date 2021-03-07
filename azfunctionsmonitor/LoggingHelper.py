@@ -22,9 +22,9 @@ class LoggingHelper(logging.LoggerAdapter):
         extra = self._get_logging_properties(context, correlation_id, record)
         return super().info(msg, extra=extra)
 
-    def warn(self, msg: str, context: func.Context = None, correlation_id: str = None, record: Dict[str, str] = None) -> None:
+    def warning(self, msg: str, context: func.Context = None, correlation_id: str = None, record: Dict[str, str] = None) -> None:
         extra = self._get_logging_properties(context, correlation_id, record)
-        return super().warn(msg, extra=extra)
+        return super().warning(msg, extra=extra)
 
     def error(self, msg: str, context: func.Context = None, correlation_id: str = None, record: Dict[str, str] = None) -> None:
         extra = self._get_logging_properties(context, correlation_id, record)
@@ -69,6 +69,6 @@ def get_logger(prefix: str, name: Optional[str] = None) -> LoggingHelper:
     logger.setLevel(level=LOGLEVEL)
 
     log_adapter = LoggingHelper(prefix, logger)
-    log_adapter.warn(f"logging set to {LOGLEVEL}")
+    log_adapter.warning(f"logging set to {LOGLEVEL}")
     return log_adapter
   
