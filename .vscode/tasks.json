@@ -1,0 +1,35 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "test publish",
+      "type": "shell",
+      "command": "source $HOME/.zshrc && source .venv/bin/activate && source .env && poetry publish -r testpypi --username __token__ --password $API_TOKEN_TEST",
+      "dependsOn": [
+       "poetry build"
+      ],
+      "problemMatcher":[]
+    },
+    {
+      "label": "prod publish",
+      "type": "shell",
+      "command": "source $HOME/.zshrc && source .venv/bin/activate && source .env && poetry publish --username __token__ --password $API_TOKEN_PROD",
+      "dependsOn": [
+       "poetry build"
+      ],
+      "problemMatcher":[]
+    },
+    {
+      "label": "poetry build",
+      "type": "shell",
+      "command": "source $HOME/.zshrc && source .venv/bin/activate && poetry build",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
