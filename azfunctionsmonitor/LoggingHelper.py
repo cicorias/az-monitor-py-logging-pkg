@@ -6,35 +6,38 @@ import azure.functions as func
 from opencensus.ext.azure.log_exporter import AzureLogHandler
 
 
-class LoggingHelper(logging.LoggerAdapter):
+class LoggingHelper:
     def __init__(self, prefix: str, logger: logging.Logger):
-        super(LoggingHelper, self).__init__(logger, {})
+        # super(LoggingHelper, self).__init__(logger, {})
+        self.adapter = logging.LoggerAdapter(logger, {})
         self.prefix = prefix
 
     def process(self, msg: str, kwargs: MutableMapping[str, Any]):
         return "[%s] %s" % (self.prefix, msg), kwargs
 
-    def debug(self, msg: str, context: func.Context = None, correlation_id: str = None, record: Dict[str, str] = None) -> None:
-        extra = self._get_logging_properties(context, correlation_id, record)
-        return super().debug(msg, extra=extra)
+    def debug(self, msg: str, context: Optional[func.Context] = None, correlation_id: Optional[str] = None, record: Optional[Dict[str, str]] = None) -> None:
+        extra = self._get_properties(context, correlation_id, record)
+        return self.adapter.debug(msg, extra=extra)
 
-    def info(self, msg: str, context: func.Context = None, correlation_id: str = None, record: Dict[str, str] = None) -> None:
-        extra = self._get_logging_properties(context, correlation_id, record)
-        return super().info(msg, extra=extra)
+    def info(self, msg: str, context: Optional[func.Context] = None, correlation_id: Optional[str] = None, record: Optional[Dict[str, str]] = None) -> None:
+        extra = self._get_properties(context, correlation_id, record)
+        return self.adapter.info(msg, extra=extra)
 
-    def warning(self, msg: str, context: func.Context = None, correlation_id: str = None, record: Dict[str, str] = None) -> None:
-        extra = self._get_logging_properties(context, correlation_id, record)
-        return super().warning(msg, extra=extra)
+    def warning(self, msg: str, context: Optional[func.Context] = None, correlation_id: Optional[str] = None, record: Optional[Dict[str, str]] = None) -> None:
+        extra = self._get_properties(context, correlation_id, record)
+        return self.adapter.warning(msg, extra=extra)
 
-    def error(self, msg: str, context: func.Context = None, correlation_id: str = None, record: Dict[str, str] = None) -> None:
-        extra = self._get_logging_properties(context, correlation_id, record)
-        return super().error(msg, extra=extra)
+    def error(self, msg: str, context: Optional[func.Context] = None, correlation_id: Optional[str] = None, record: Optional[Dict[str, str]] = None) -> None:
+        extra = self._get_properties(context, correlation_id, record)
+        return self.adapter.error(msg, extra=extra)
 
-    def exception(self, msg: str, context: func.Context = None, correlation_id: str = None, record: Dict[str, str] = None) -> None:
-        extra = self._get_logging_properties(context, correlation_id, record)
-        return super().exception(msg, extra=extra)
+    def exception(
+        self, msg: str, context: Optional[func.Context] = None, correlation_id: Optional[str] = None, record: Optional[Dict[str, str]] = None
+    ) -> None:
+        extra = self._get_properties(context, correlation_id, record)
+        return self.adapter.exception(msg, extra=extra)
 
-    def _get_logging_properties(self, context: func.Context, correlation_id: str, record: Dict[str, str]):
+    def _get_properties(self, context: Optional[func.Context], correlation_id: Optional[str], record: Optional[Dict[str, str]]):
         properties = {
             "custom_dimensions": {
                 "CorrelationId": correlation_id if correlation_id is not None else "-- not provided --",
@@ -42,6 +45,7 @@ class LoggingHelper(logging.LoggerAdapter):
             }
         }
 
+        # pyright: reportUnnecessaryIsInstance=false
         if record is not None and isinstance(record, dict):
             properties["custom_dimensions"].update(record)
 
@@ -71,4 +75,3 @@ def get_logger(prefix: str, name: Optional[str] = None) -> LoggingHelper:
     log_adapter = LoggingHelper(prefix, logger)
     log_adapter.warning(f"logging set to {LOGLEVEL}")
     return log_adapter
-  

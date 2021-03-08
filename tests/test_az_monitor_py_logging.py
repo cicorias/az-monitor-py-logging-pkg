@@ -2,5 +2,13 @@ from azfunctionsmonitor import __version__, get_logger
 
 
 def test_version():
-    l = get_logger("foo")
-    assert __version__ == '0.1.112'
+    logger = get_logger("foo")
+    logger.debug("heelo")
+    assert __version__ == "0.1.112"
+
+
+if __name__ == "__main__":
+    print("test run directly")
+    test_version()
+else:
+    print("run under pytest..")
